@@ -29,13 +29,13 @@ const PYUSD_WEIGHT: f64 = 0.20; // 20%
 // Check if pool needs rebalancing
 fn needs_rebalance(&self) -> bool {
     let total_value = self.usdc + self.usdt + self.pyusd;
-    
+
     let usdc_weight = self.usdc as f64 / total_value as f64;
     let usdt_weight = self.usdt as f64 / total_value as f64;
     let pyusd_weight = self.pyusd as f64 / total_value as f64;
-    
-    (usdc_weight - USDC_WEIGHT).abs() > 0.01 || 
-    (usdt_weight - USDT_WEIGHT).abs() > 0.01 || 
+
+    (usdc_weight - USDC_WEIGHT).abs() > 0.01 ||
+    (usdt_weight - USDT_WEIGHT).abs() > 0.01 ||
     (pyusd_weight - PYUSD_WEIGHT).abs() > 0.01
 }
 ```
@@ -50,16 +50,16 @@ Fees automatically adjust based on pool imbalance:
 fn calculate_fee(&self) -> f64 {
     let base_fee = 0.0005; // 0.05%
     let max_fee = 0.005;   // 0.5%
-    
+
     let total_value = self.usdc + self.usdt + self.pyusd;
     let usdc_weight = self.usdc as f64 / total_value as f64;
     let usdt_weight = self.usdt as f64 / total_value as f64;
     let pyusd_weight = self.pyusd as f64 / total_value as f64;
-    
-    let deviation = (usdc_weight - USDC_WEIGHT).abs() + 
-                   (usdt_weight - USDT_WEIGHT).abs() + 
+
+    let deviation = (usdc_weight - USDC_WEIGHT).abs() +
+                   (usdt_weight - USDT_WEIGHT).abs() +
                    (pyusd_weight - PYUSD_WEIGHT).abs();
-    
+
     (base_fee + deviation).min(max_fee)
 }
 ```
@@ -85,7 +85,7 @@ fn calculate_fee(&self) -> f64 {
 ### Setup
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/equilibrium-core.git
+git clone https://github.com/andi-nugroho/equilibrium-core.git
 cd equilibrium-core
 
 # Install dependencies
